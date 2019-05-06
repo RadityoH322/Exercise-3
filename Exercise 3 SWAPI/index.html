@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercise 3-Radityo H</title>
+    
+<style>
+    * {
+  box-sizing: border-box;}
+
+#myInput {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  background-color: #FFFA81;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #585C4C;
+  background-color:rgb(255, 255, 254);
+}
+
+#myTable tr.header {
+  background-color:#78e462;
+}
+
+#myTable tr:hover{
+    background-color: rgba(204, 201, 19, 0.432);
+}
+
+</style>
+</head>
+<body>
+    <h1>Planet List</h1>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for planet names" title="Type in a name">
+    <table id="myTable" border="1">
+        
+        <!-- The Row Number 0 -->
+        <tr class="header">
+            <th style="width:auto;">NAME</th>
+            <th style="width:auto;">ROTATION PERIOD</th>
+            <th style="width:auto;">ORBITAL PERIOD</th>
+            <th style="width:auto;">DIAMETER</th>
+            <th style="width:auto;">CLIMATE</th>
+            <th style="width:auto;">GRAVITY</th>
+            <th style="width:auto;">TERRAIN</th>
+        </tr>
+        
+    </table>
+    
+    <script>
+        /* populate the table with data from array */
+        var array = [["Alderaan","24","364","12500","temperate","1 standard","grasslands, mountains"],
+                     ["Yavin IV","24","364","4818","temperate, tropical","1 standard","jungle, rainforests"],
+                     ["Hoth","23","549","7200","frozen","1.1 standard","tundra, ice caves, mountain ranges"],
+                     ["Dagobah","23","341","8900","murky","N/A","swamp, jungles"],
+                     ["Bespin","12","5110","118000","temperate","1.5 (surface), 1 standard (Cloud City)","gas giant"]],                     
+                  table = document.getElementById("myTable");
+    
+    
+    /*// rows
+    for(var i = 1; i < table.rows.length; i++)
+    {
+      // cells
+      for(var j = 0; j < table.rows[i].cells.length; j++)
+      {
+          table.rows[i].cells[j].innerHTML = array[i - 1][j];
+      }
+    }
+    */
+             
+       // Method 2
+       
+       for(var i = 0; i < array.length; i++)
+       {
+           // create a new row
+           var newRow = table.insertRow(table.length);
+           for(var j = 0; j < array[i].length; j++)
+           {
+               // create a new cell
+               var cell = newRow.insertCell(j);
+               
+               // add value to the cell
+               cell.innerHTML = array[i][j];
+           }
+       }
+       function myFunction() {
+       var input, filter, table, tr, td, i, txtValue;
+       input = document.getElementById("myInput");
+       filter = input.value.toUpperCase();
+       table = document.getElementById("myTable");
+       tr = table.getElementsByTagName("tr");
+       for (i = 0; i < tr.length; i++) {
+         td = tr[i].getElementsByTagName("td")[0];
+         if (td) {
+           txtValue = td.textContent || td.innerText;
+           if (txtValue.toUpperCase().indexOf(filter) > -1) {
+             tr[i].style.display = "";
+           } else {
+             tr[i].style.display = "none";
+           }
+         }       
+       }
+     }
+    </script>
+    
+</body>
+</html>
